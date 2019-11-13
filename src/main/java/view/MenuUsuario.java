@@ -1,6 +1,10 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import controller.ControladoraUsuario;
+import model.vo.UsuarioVO;
 
 public class MenuUsuario {
 	
@@ -62,17 +66,24 @@ public class MenuUsuario {
 
 	private void consultarUsuario() {
 		
+		ControladoraUsuario controladoraUsuario = new ControladoraUsuario();
+		
 		int opcao = this.apresentarOpcoesConsulta();
 			while(opcao != OPCAO_MENU_CONSULTAR_USUARIO_SAIR) {
 					switch(opcao) {
 						case OPCAO_MENU_CONSULTAR_TODOS_USUARIO: {
 							opcao = OPCAO_MENU_CONSULTAR_USUARIO_SAIR;
-							System.out.println("Consulta Todos");
+							ArrayList<UsuarioVO> listaUsuariosVO = controladoraUsuario.consultarTodosUsuariosController();
 							break;
 						}
 						case OPCAO_MENU_CONSULTAR_UM_USUARIO:{
 							opcao = OPCAO_MENU_CONSULTAR_USUARIO_SAIR;
-							System.out.println("Consulta Específico");
+							UsuarioVO usuarioVO = new UsuarioVO();
+							System.out.print("\nInforme o código do usuário: ");
+							usuarioVO.setIdUsuario(Integer.parseInt(teclado.nextLine()));
+							
+							UsuarioVO usuario = controladoraUsuario.consultarUsuarioController(usuarioVO);
+							
 							break;
 						}
 						default:{
@@ -87,7 +98,7 @@ public class MenuUsuario {
 	
 	private int apresentarOpcoesConsulta() {
 		
-		System.out.println("\nSitema Avisos - Menu de consulta");
+		System.out.println("\nSitema Avisos - Menu de consulta Estagio");
 		System.out.println("\nInforme o tipo de consulta a ser realizada: ");
 		System.out.println(OPCAO_MENU_CONSULTAR_TODOS_USUARIO + " - Consultar todos os usuários");
 		System.out.println(OPCAO_MENU_CONSULTAR_UM_USUARIO + "- Consultar um usuário específico");
@@ -103,19 +114,57 @@ public class MenuUsuario {
 
 
 	private void cadastrarUsuario() {
-		// TODO Auto-generated method stub
+		
+		UsuarioVO usuarioVO = new UsuarioVO();
+		System.out.print("\nDigite o nome do Usuário: ");
+		usuarioVO.setNome(teclado.nextLine());
+		System.out.print("\nDigite o CPF do Usuário: ");
+		usuarioVO.setCpf(teclado.nextLine());
+		System.out.print("\nDigite o Email do Usuário: ");
+		usuarioVO.setEmail(teclado.nextLine());
+		usuarioVO.setIdTipoUsuario(1);
+		System.out.print("\nDigite o Login do Usuário: ");
+		usuarioVO.setLogin(teclado.nextLine());
+		System.out.print("\nDigite o Senha do Usuário: ");
+		usuarioVO.setSenha(teclado.nextLine());
+		
+		ControladoraUsuario controladoraUsuario = new ControladoraUsuario();
+		controladoraUsuario.cadastrarUsuarioController(usuarioVO);
+		
 		
 	}
 	
 
 	private void atualizarUsuario() {
-		// TODO Auto-generated method stub
+		UsuarioVO usuarioVO = new UsuarioVO();
+		
+		System.out.print("\nDigite o código do Usuário: ");
+		usuarioVO.setIdUsuario(Integer.parseInt(teclado.nextLine()));
+		System.out.print("\nDigite o nome do Usuário: ");
+		usuarioVO.setNome(teclado.nextLine());
+		System.out.print("\nDigite o CPF do Usuário: ");
+		usuarioVO.setCpf(teclado.nextLine());
+		System.out.print("\nDigite o email do Usuário: ");
+		usuarioVO.setEmail(teclado.nextLine());
+		usuarioVO.setIdTipoUsuario(1);
+		System.out.print("\nDigite o Senha do Usuário: ");
+		usuarioVO.setSenha(teclado.nextLine());
+		
+		ControladoraUsuario controladoraUsuario = new ControladoraUsuario();
+		controladoraUsuario.atualizarUsuarioController(usuarioVO);
+		
 		
 	}
 	
 
 	private void excluirUsuario() {
-		// TODO Auto-generated method stub
+		UsuarioVO usuarioVO = new UsuarioVO();
+		
+		System.out.print("\nInforme o código do usuário: ");
+		usuarioVO.setIdUsuario(Integer.parseInt(teclado.nextLine()));
+		
+		ControladoraUsuario controladoraUsuario = new ControladoraUsuario();
+		controladoraUsuario.excluirUsuarioController(usuarioVO);
 		
 	}
 
