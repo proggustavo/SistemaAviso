@@ -109,6 +109,8 @@ public class AvisoCursoLivre {
 		System.out.println("Digite o requisito: ");
 		cursoLivreVO.setRequisito(teclado.nextLine());
 		System.out.println("Digite o ambiente: ");
+		cursoLivreVO.setAmbiente(teclado.nextLine());
+		System.out.println("Digite a data");
 		cursoLivreVO.setData(teclado.nextLine());
 		System.out.println("Digite o valor: ");
 		cursoLivreVO.setValor(Double.parseDouble(teclado.nextLine()));

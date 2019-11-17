@@ -29,7 +29,14 @@ public class AvisoEstagioBO {
 	
 	public void cadastrarAvisoEstagioBO(EstagioVO estagioVO) {
 		AvisoEstagioDAO avisoEstagioDAO = new AvisoEstagioDAO();
+		
+		
 		int resultado = avisoEstagioDAO.cadastrarAvisoEstagioDAO(estagioVO);
+		if(resultado == 1 ) {
+			System.out.println("\nAviso cadastrado!");
+		}else {
+			System.out.println("\nAviso não cadastrado");
+		}
 		
 	}
 
@@ -39,7 +46,18 @@ public class AvisoEstagioBO {
 	}
 
 	public void excluirAvisoEstagioBO(EstagioVO estagioVO) {
-		// TODO Auto-generated method stub
+		AvisoEstagioDAO avisoEstagioDAO = new AvisoEstagioDAO();
+		if(avisoEstagioDAO.existeAvisoEstagioPorId(estagioVO.getIdAvisoEstagio())) {
+			int resultado = avisoEstagioDAO.excluirAvisoEstagioDAO(estagioVO);
+				if(resultado == 1) {
+					System.out.println("\nAviso Excluído com Sucesso!");
+				}else {
+					System.out.println("\n Não foi possível excluir");
+				}
+		}else {
+			
+			System.out.println("\nAviso não existe");
+		}
 		
 	}
 
