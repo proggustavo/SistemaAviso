@@ -66,6 +66,8 @@ public class AvisoEstagioDAO {
 			if(rs.next()) {
 				return true;
 				
+			}else {
+				return false;
 			}
 		}catch(SQLException e) {
 			System.out.println("Erro ao pesquisar " + e);
@@ -77,7 +79,7 @@ public class AvisoEstagioDAO {
 			Banco.closeConnection(conn);
 		}
 		
-		return false;
+		
 		
 		
 	}

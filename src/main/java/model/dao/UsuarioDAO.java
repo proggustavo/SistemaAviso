@@ -13,13 +13,79 @@ import model.vo.UsuarioVO;
 public class UsuarioDAO {
 	
 	public ArrayList<UsuarioVO> consultarTodosUsuariosDAO() {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		
+		ArrayList<UsuarioVO> listaUsuariosVO = new ArrayList<UsuarioVO>();
+		String query = "SELECT IDUSUARIO,  NOME, CPF, EMAIL FROM USUARIO";
+				
+		try {
+			
+			resultado = stmt.executeQuery(query);
+			while(resultado.next()) {
+				
+				UsuarioVO usuario = new UsuarioVO();
+				
+				usuario.setIdUsuario(Integer.parseInt(resultado.getString(1)));
+				usuario.setNome(resultado.getString(2));
+				usuario.setCpf(resultado.getString(3));
+				usuario.setEmail(resultado.getString(4));
+				
+				listaUsuariosVO.add(usuario);
+			}
+			
+		}catch(SQLException e) {
+			
+			System.out.println("Erro ao consultar todos os Usuários " + e);
+			
+		}finally{
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		
+		return listaUsuariosVO;
 	}
 
 	public UsuarioVO consultarUsuarioDAO(UsuarioVO usuarioVO) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		
+		
+		UsuarioVO usuario = new UsuarioVO();
+		
+		String query = "SELECT IDUSUARIO,  NOME, CPF, EMAIL FROM USUARIO WHERE IDUSUARIO = " + usuarioVO.getIdUsuario();
+				
+		try {
+			
+			resultado = stmt.executeQuery(query);
+			
+			if(resultado.next()) {
+					
+				usuario.setIdUsuario(Integer.parseInt(resultado.getString(1)));
+				usuario.setNome(resultado.getString(2));
+				usuario.setCpf(resultado.getString(3));
+				usuario.setEmail(resultado.getString(4));
+				
+				
+			}
+			
+		}catch(SQLException e) {
+			
+			System.out.println("Erro ao consultar Usuários Específico" + e);
+			
+		}finally{
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		
+		return usuario;
+		
+		
+		
 	}
 	
 
@@ -150,10 +216,38 @@ public class UsuarioDAO {
 	}
 
 	public int atualizarUsuarioDAO(UsuarioVO usuarioVO) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		int resultado = 0;
+		
+		String query = "UPDATE USUARIO SET NOME '" + usuarioVO.getNome() + "', "
+				+ " cpf = '" + usuarioVO.getCpf() + "', "
+				+ " email = '" + usuarioVO.getEmail() + "', "
+				+ " idTipoUsuario = " + usuarioVO.getIdTipoUsuario() + ", "
+				+ " senha = " + usuarioVO.getSenha() + "', "
+				+ " WHERE idUsuario = " + usuarioVO.getIdUsuario(); 
+				;
+		
+		
+		try {
+			
+			// apesar de fazer um insert utilizamos o update pois ele funciona para delete, insert e update
+			resultado = stmt.executeUpdate(query);
+			
+		}catch(SQLException e) {
+			System.out.println("Erro ao executar a query de atualização de Usuário");
+			System.out.println("Erro: " + e.getMessage());
+			
+			
+			
+		} finally {			
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+			
+		}
+		
+		return resultado;
 	}
-
 	
 	
 

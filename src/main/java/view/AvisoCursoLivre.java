@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import controller.ControladoraAvisoCursoLivre;
 import model.vo.CursoLivreVO;
-import model.vo.EstagioVO;
+
 
 public class AvisoCursoLivre {
 

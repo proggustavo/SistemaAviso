@@ -54,6 +54,7 @@ public class AvisoEstagio {
 	}
 
 	private int apresentarOpcoesMenu() {
+		
 		System.out.println("\nSistema de avisos - Menu Avisos Estágio ");
 		System.out.println("\n Opções: ");
 		System.out.println(OPCAO_MENU_CONSULTAR_AVISO_ESTAGIO + " - Consultar aviso");
@@ -90,9 +91,9 @@ public class AvisoEstagio {
 		System.out.println("\nDigite o cargo da vaga oferecida: ");
 		estagioVO.setCargo(teclado.nextLine());
 		System.out.println("\nDigite a jornada de trabalho: ");
-		estagioVO.setJornada(teclado.nextInt());
+		estagioVO.setJornada(Integer.parseInt(teclado.nextLine()));
 		System.out.println("\nDigite a remuneração: ");
-		estagioVO.setRemuneracao(teclado.nextDouble());
+		estagioVO.setRemuneracao(Double.parseDouble(teclado.nextLine()));
 
 		ControladoraAvisoEstagio controladoraAvisoEstagio = new ControladoraAvisoEstagio();
 		controladoraAvisoEstagio.atualizarAvisoEstagioController(estagioVO);
@@ -112,10 +113,10 @@ public class AvisoEstagio {
 		System.out.println("\nDigite o cargo da vaga oferecida: ");
 		estagioVO.setCargo(teclado.nextLine());
 		System.out.println("\nDigite a jornada de trabalho: ");
-		estagioVO.setJornada(teclado.nextInt());
+		estagioVO.setJornada(Integer.parseInt(teclado.nextLine()));
 		System.out.println("\nDigite a remuneração: ");
-		estagioVO.setRemuneracao(teclado.nextDouble());
-
+		estagioVO.setRemuneracao(Double.parseDouble(teclado.nextLine()));
+		
 		ControladoraAvisoEstagio controladoraAvisoEstagio = new ControladoraAvisoEstagio();
 		controladoraAvisoEstagio.cadastrarAvisoEstagioController(estagioVO);
 
