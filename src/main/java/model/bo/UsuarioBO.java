@@ -76,6 +76,11 @@ public class UsuarioBO {
 		
 		return usuario;
 	}
+
+	public UsuarioVO recuperarUsuarioBO(UsuarioVO usuarioVO) {
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		return usuarioDAO.recuperarUsuarioDAO(usuarioVO) ;
+	}
 	
 	
 	

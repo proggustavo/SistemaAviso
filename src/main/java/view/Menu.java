@@ -2,6 +2,8 @@ package view;
 
 import java.util.Scanner;
 
+import model.vo.UsuarioVO;
+
 public class Menu {
 	
 	Scanner teclado = new Scanner(System.in);
@@ -12,7 +14,7 @@ public class Menu {
 	private static final int OPCAO_MENU_SAIR = 4;
 
 	
-	public void apresentarMenu() {
+	public void apresentarMenu(UsuarioVO usuarioVO) {
 		int opcao = this.apresentarOpcoesMenu();
 			while(opcao != OPCAO_MENU_SAIR ) {
 				switch(opcao) {

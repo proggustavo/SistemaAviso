@@ -36,6 +36,12 @@ public class ControladoraUsuario {
 		
 	}
 
+	public UsuarioVO recuperarUsuarioController(UsuarioVO usuarioVO) {
+		UsuarioBO usuarioBO = new UsuarioBO();
+		return usuarioBO.recuperarUsuarioBO(usuarioVO);
+		
+	}
+
 	
 	
 	

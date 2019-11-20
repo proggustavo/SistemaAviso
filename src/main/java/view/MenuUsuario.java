@@ -74,6 +74,13 @@ public class MenuUsuario {
 						case OPCAO_MENU_CONSULTAR_TODOS_USUARIO: {
 							opcao = OPCAO_MENU_CONSULTAR_USUARIO_SAIR;
 							ArrayList<UsuarioVO> listaUsuariosVO = controladoraUsuario.consultarTodosUsuariosController();
+							
+							System.out.print("\n--------- RESULTADO DA CONSULTA ----------");
+							System.out.printf("\n%3s  %-40s  %-15s  %-15s  \n", "ID", "Nome", "CPF", "E-mail"); // o " - " serve para alinhar a esquerda
+							for(int i =0; i < listaUsuariosVO.size(); i ++) {
+								listaUsuariosVO.get(i).imprimir(); // o get indica a posição 
+							}
+							
 							break;
 						}
 						case OPCAO_MENU_CONSULTAR_UM_USUARIO:{
@@ -83,6 +90,11 @@ public class MenuUsuario {
 							usuarioVO.setIdUsuario(Integer.parseInt(teclado.nextLine()));
 							
 							UsuarioVO usuario = controladoraUsuario.consultarUsuarioController(usuarioVO);
+							
+							System.out.print("\n--------- RESULTADO DA CONSULTA ----------");
+							System.out.printf("\n%3s  %-40s  %-15s  %-15s  \n", "ID", "Nome", "CPF", "E-mail"); // o " - " serve para alinhar a esquerda
+							
+							usuario.imprimir();
 							
 							break;
 						}
@@ -187,6 +199,27 @@ public class MenuUsuario {
 		
 		
 		
+	}
+
+
+	public UsuarioVO recuperarUsuario() {
+		UsuarioVO usuarioVO = new UsuarioVO();
+		
+		System.out.print("Digite o login do usuário: ");
+		usuarioVO.setLogin(teclado.nextLine());
+		System.out.print("Digite a senha: ");
+		usuarioVO.setSenha(teclado.nextLine());
+		
+		ControladoraUsuario controladoraUsuario = new ControladoraUsuario();
+		return controladoraUsuario.recuperarUsuarioController(usuarioVO);
+	}
+
+
+
+
+
+	public void criarNovoUsuario() {
+		this.cadastrarUsuario();
 	}
 
 }

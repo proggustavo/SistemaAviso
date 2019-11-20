@@ -248,6 +248,47 @@ public class UsuarioDAO {
 		
 		return resultado;
 	}
+
+	public UsuarioVO recuperarUsuarioDAO(UsuarioVO usuarioVO) {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		
+		
+		
+		
+		String query = "SELECT IDUSUARIO, IDTIPOUSUARIO, NOME, CPF, EMAIL FROM USUARIO WHERE LOGIN = '" + usuarioVO.getLogin() + "' " + " AND SENHA = '" + usuarioVO.getSenha() + " '";
+				
+		try {
+			
+			resultado = stmt.executeQuery(query);
+			
+			if(resultado.next()) {
+				
+				usuarioVO.setIdUsuario(Integer.parseInt(resultado.getString(1)));
+				usuarioVO.setIdTipoUsuario(Integer.parseInt(resultado.getString(2)));
+				usuarioVO.setNome(resultado.getString(3));
+				usuarioVO.setCpf(resultado.getString(4));
+				usuarioVO.setEmail(resultado.getString(5));
+				
+				
+			}
+			
+		}catch(SQLException e) {
+			
+			System.out.println("Erro ao executar a query que recupera usuário" + e);
+			
+		}finally{
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		
+		return usuarioVO;
+		
+		
+		
+	}
 	
 	
 

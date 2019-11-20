@@ -1,13 +1,13 @@
 package executavel;
 
-import view.Menu;
+import view.MenuLogin;
 
 public class Executavel {
 
 	public static void main(String[] args) {
 		
-		Menu menu = new Menu();
-		menu.apresentarMenu();
+		MenuLogin menuLogin = new MenuLogin();
+		menuLogin.apresentarMenuLogin();
 		
 		System.out.println("Encerrado");
 
