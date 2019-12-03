@@ -12,15 +12,20 @@ public class Menu {
 	private static final int OPCAO_MENU_RELATORIO = 2;
 	private static final int OPCAO_MENU_USUARIO = 3;
 	private static final int OPCAO_MENU_SAIR = 4;
+	
+	private static final int ADMINISTRADOR = 1;
+	private static final int COORDENADOR = 2;
+	private static final int SECRETARIA = 3;
+	private static final int ALUNO = 4;
 
 	
 	public void apresentarMenu(UsuarioVO usuarioVO) {
-		int opcao = this.apresentarOpcoesMenu();
+		int opcao = this.apresentarOpcoesMenu(usuarioVO.getIdTipoUsuario());
 			while(opcao != OPCAO_MENU_SAIR ) {
 				switch(opcao) {
 				case OPCAO_MENU_AVISO:{
 					MenuAviso menuAviso = new MenuAviso();
-					menuAviso.apresentarMenuAviso();
+					menuAviso.apresentarMenuAviso(usuarioVO);
 					break;
 				}
 				case OPCAO_MENU_RELATORIO:{
@@ -41,21 +46,29 @@ public class Menu {
 								
 				}
 				
-			opcao = this.apresentarOpcoesMenu();
+			opcao = this.apresentarOpcoesMenu(usuarioVO.getIdTipoUsuario());
 			
 		}
 	}
 	
-	private int apresentarOpcoesMenu() {
+	private int apresentarOpcoesMenu(int tipoUsuario) {
 		System.out.println("\nSistema de Avisos - Menu Principal");
 		System.out.println("\n Opções: ");
 		System.out.println(OPCAO_MENU_AVISO + " - Menu de Avisos");
-		System.out.println(OPCAO_MENU_RELATORIO + " - Menu de Relatórios");
-		System.out.println(OPCAO_MENU_USUARIO + " - Menu de Usuários");
+		if(tipoUsuario != ALUNO ) {
+			System.out.println(OPCAO_MENU_RELATORIO + " - Menu de Relatórios");
+			
+		}
+		if(tipoUsuario != ADMINISTRADOR || tipoUsuario != COORDENADOR ) {
+			System.out.println(OPCAO_MENU_USUARIO + " - Menu de Usuários");
+		}		
 		System.out.println(OPCAO_MENU_SAIR + " - Sair");
 		System.out.print("\nDigite uma opção: ");
 		return Integer.parseInt(teclado.nextLine());
 	}
+	
+	
+	
 	
 
 }

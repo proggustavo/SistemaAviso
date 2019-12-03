@@ -3,6 +3,7 @@ package model.bo;
 import java.util.ArrayList;
 
 import model.dao.UsuarioDAO;
+import model.vo.TipoUsuarioVO;
 import model.vo.UsuarioVO;
 
 public class UsuarioBO {
@@ -80,6 +81,11 @@ public class UsuarioBO {
 	public UsuarioVO recuperarUsuarioBO(UsuarioVO usuarioVO) {
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		return usuarioDAO.recuperarUsuarioDAO(usuarioVO) ;
+	}
+
+	public ArrayList<TipoUsuarioVO> consultarTipoUsuarioBO() {
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		return usuarioDAO.consultarTipoUsuarioDAO();
 	}
 	
 	

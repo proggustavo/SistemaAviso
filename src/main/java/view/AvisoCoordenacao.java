@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import controller.ControladoraAvisoCoordenacao;
-import controller.ControladoraAvisoEstagio;
+
 import model.vo.AvisoCoordenacaoVO;
-import model.vo.EstagioVO;
+
+import model.vo.UsuarioVO;
 
 public class AvisoCoordenacao {
 
@@ -22,10 +23,12 @@ public class AvisoCoordenacao {
 	private static final int OPCAO_MENU_CONSULTAR_UM_AVISO_COORDENACAO = 2;
 	private static final int OPCAO_MENU_CONSULTAR_COORDENACAO_SAIR = 9;
 
+	private static final int ADMINISTRADOR = 1;
+	private static final int COORDENADOR = 2;
 
-	public void apresentarMenu() {
+	public void apresentarMenu(UsuarioVO usuarioVO) {
 
-		int opcao = this.apresentarOpcoesMenu();
+		int opcao = this.apresentarOpcoesMenu(usuarioVO.getIdTipoUsuario());
 
 		while (opcao != OPCAO_MENU_AVISO_SAIR) {
 			switch (opcao) {
@@ -34,11 +37,11 @@ public class AvisoCoordenacao {
 				break;
 			}
 			case OPCAO_MENU_CADASTRAR_AVISO: {
-				this.cadastrarAviso();
+				this.cadastrarAviso(usuarioVO);
 				break;
 			}
 			case OPCAO_MENU_ATUALIZAR_AVISO: {
-				this.atualizarAviso();
+				this.atualizarAviso(usuarioVO);
 				break;
 			}
 			case OPCAO_MENU_EXCLUIR_AVISO: {
@@ -50,19 +53,21 @@ public class AvisoCoordenacao {
 			}
 			}
 
-			opcao = this.apresentarOpcoesMenu();
+			opcao = this.apresentarOpcoesMenu(usuarioVO.getIdTipoUsuario());
 		}
 
 	}
 
-	private int apresentarOpcoesMenu() {
+	private int apresentarOpcoesMenu(int tipoUsuario) {
 
 		System.out.println("\nSistema de Avisos - Menu Avisos Coordenação ");
 		System.out.println("\n Opções: ");
 		System.out.println(OPCAO_MENU_CONSULTAR_AVISO + " - Consultar aviso");
-		System.out.println(OPCAO_MENU_CADASTRAR_AVISO + " - Cadastrar aviso");
-		System.out.println(OPCAO_MENU_ATUALIZAR_AVISO + " - Atualizar aviso");
-		System.out.println(OPCAO_MENU_EXCLUIR_AVISO + " - Excluir aviso");
+		if(tipoUsuario == ADMINISTRADOR || tipoUsuario == COORDENADOR){
+			System.out.println(OPCAO_MENU_CADASTRAR_AVISO + " - Cadastrar aviso");
+			System.out.println(OPCAO_MENU_ATUALIZAR_AVISO + " - Atualizar aviso");
+			System.out.println(OPCAO_MENU_EXCLUIR_AVISO + " - Excluir aviso");
+		}
 		System.out.println(OPCAO_MENU_AVISO_SAIR + " - Voltar");
 		System.out.print("\nDigite uma opção: ");
 		return Integer.parseInt(teclado.nextLine());
@@ -81,7 +86,7 @@ public class AvisoCoordenacao {
 
 	}
 
-	private void atualizarAviso() {
+	private void atualizarAviso(UsuarioVO usuarioVO) {
 		AvisoCoordenacaoVO avisoCoordenacaoVO = new AvisoCoordenacaoVO();
 
 		System.out.println("\nDigite o código do aviso: ");
@@ -94,7 +99,7 @@ public class AvisoCoordenacao {
 		controladoraAvisoCoordenacao.atualizarAvisoCoordenacaoController(avisoCoordenacaoVO);
 	}
 
-	private void cadastrarAviso() {
+	private void cadastrarAviso(UsuarioVO usuarioVO) {
 		AvisoCoordenacaoVO avisoCoordenacaoVO = new AvisoCoordenacaoVO();
 
 		System.out.println("\nDigite o código do aviso: ");

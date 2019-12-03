@@ -2,8 +2,8 @@ package view;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import controller.ControladoraUsuario;
+import model.vo.TipoUsuarioVO;
 import model.vo.UsuarioVO;
 
 public class MenuUsuario {
@@ -56,12 +56,7 @@ public class MenuUsuario {
 					
 				}
 		
-		
-		
 	}
-
-
-
 
 
 	private void consultarUsuario() {
@@ -100,12 +95,12 @@ public class MenuUsuario {
 						}
 						default:{
 							System.out.println("Opção inválida!");
-							opcao = this.apresentarOpcoesConsulta();
 						}
 					}
-					
+							opcao = this.apresentarOpcoesConsulta();
+							
 			}
-		
+
 	}
 	
 	private int apresentarOpcoesConsulta() {
@@ -122,9 +117,6 @@ public class MenuUsuario {
 	}
 
 
-
-
-
 	private void cadastrarUsuario() {
 		
 		UsuarioVO usuarioVO = new UsuarioVO();
@@ -134,7 +126,10 @@ public class MenuUsuario {
 		usuarioVO.setCpf(teclado.nextLine());
 		System.out.print("\nDigite o Email do Usuário: ");
 		usuarioVO.setEmail(teclado.nextLine());
-		usuarioVO.setIdTipoUsuario(1);
+		
+		int opcao = this.apresentarOpcoesTipoUsuario();
+		usuarioVO.setIdTipoUsuario(opcao);
+		
 		System.out.print("\nDigite o Login do Usuário: ");
 		usuarioVO.setLogin(teclado.nextLine());
 		System.out.print("\nDigite o Senha do Usuário: ");
@@ -147,6 +142,19 @@ public class MenuUsuario {
 	}
 	
 
+	private int apresentarOpcoesTipoUsuario() {
+		ControladoraUsuario controladoraUsuario = new ControladoraUsuario();
+		ArrayList<TipoUsuarioVO> tipoUsuarioVO = controladoraUsuario.consultarTipoUsuario();
+		System.out.println("\n---------- Tipos de Usuário ----------");
+		System.out.println("Opções: ");
+		for(int i = 0; i < tipoUsuarioVO.size(); i ++) {
+			System.out.println(tipoUsuarioVO.get(i).getIdTipoUsuario() + " - " + tipoUsuarioVO.get(i).getDescricao());
+		}
+		System.out.print("Digite o número da opção: ");
+		return Integer.parseInt(teclado.nextLine());
+	}
+
+
 	private void atualizarUsuario() {
 		UsuarioVO usuarioVO = new UsuarioVO();
 		
@@ -158,7 +166,10 @@ public class MenuUsuario {
 		usuarioVO.setCpf(teclado.nextLine());
 		System.out.print("\nDigite o email do Usuário: ");
 		usuarioVO.setEmail(teclado.nextLine());
-		usuarioVO.setIdTipoUsuario(1);
+		
+		int opcao = this.apresentarOpcoesTipoUsuario();
+		usuarioVO.setIdTipoUsuario(opcao);
+		
 		System.out.print("\nDigite o Senha do Usuário: ");
 		usuarioVO.setSenha(teclado.nextLine());
 		

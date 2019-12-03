@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import controller.ControladoraAvisoEstagio;
 import model.vo.EstagioVO;
+import model.vo.UsuarioVO;
 
 public class AvisoEstagio {
 
@@ -20,7 +21,7 @@ public class AvisoEstagio {
 	private static final int OPCAO_MENU_CONSULTAR_UM_AVISO_ESTAGIO = 2;
 	private static final int OPCAO_MENU_CONSULTAR_ESTAGIO_SAIR = 9;
 
-	public void apresentarMenu() {
+	public void apresentarMenu(UsuarioVO usuarioVO) {
 
 		int opcao = this.apresentarOpcoesMenu();
 

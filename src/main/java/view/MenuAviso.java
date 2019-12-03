@@ -2,6 +2,8 @@ package view;
 
 import java.util.Scanner;
 
+import model.vo.UsuarioVO;
+
 public class MenuAviso {
 	
 	Scanner teclado = new Scanner(System.in);
@@ -12,7 +14,7 @@ public class MenuAviso {
 	private static final int OPCAO_MENU_AVISO_SAIR = 9;
 	
 	
-	public void apresentarMenuAviso() {
+	public void apresentarMenuAviso(UsuarioVO usuarioVO) {
 		
 		int opcao = this.apresentarOpcoesMenuAviso();
 		
@@ -20,17 +22,17 @@ public class MenuAviso {
 				switch(opcao) {
 						case OPCAO_MENU_AVISO_COORDENACAO: {
 							AvisoCoordenacao avisoCoordencao = new AvisoCoordenacao();
-							avisoCoordencao.apresentarMenu();
+							avisoCoordencao.apresentarMenu(usuarioVO);
 							break;
 						}
 						case OPCAO_MENU_AVISO_ESTAGIO: {
 							AvisoEstagio avisoEstagio = new AvisoEstagio();
-							avisoEstagio.apresentarMenu();
+							avisoEstagio.apresentarMenu(usuarioVO);
 							break;
 						}
 						case OPCAO_MENU_AVISO_CURSOLIVRE: {
 							AvisoCursoLivre avisoCursoLivre = new AvisoCursoLivre();
-							avisoCursoLivre.apresentarMenu();
+							avisoCursoLivre.apresentarMenu(usuarioVO);
 							break;
 						}
 						default: {

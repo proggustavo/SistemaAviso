@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import model.vo.TipoUsuarioVO;
 import model.vo.UsuarioVO;
 
 public class UsuarioDAO {
@@ -285,6 +286,43 @@ public class UsuarioDAO {
 		}
 		
 		return usuarioVO;
+		
+		
+		
+	}
+
+	public ArrayList<TipoUsuarioVO> consultarTipoUsuarioDAO() {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		ArrayList<TipoUsuarioVO> lista = new ArrayList<TipoUsuarioVO>();
+		
+		String query = "SELECT IDTIPOUSUARIO, DESCRICAO FROM TIPOUSUARIO";
+				
+		try {
+			
+			resultado = stmt.executeQuery(query);
+			
+			while(resultado.next()) {
+				TipoUsuarioVO tipoUsuario = new TipoUsuarioVO();
+				
+				tipoUsuario.setIdTipoUsuario(Integer.parseInt(resultado.getString(1)));
+				tipoUsuario.setDescricao(resultado.getNString(2));
+				lista.add(tipoUsuario);
+				
+			}
+			
+		}catch(SQLException e) {
+			
+			System.out.println("Erro ao executar a query que recupera os tipos de usuário" + e);
+			
+		}finally{
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		
+		return lista;
 		
 		
 		

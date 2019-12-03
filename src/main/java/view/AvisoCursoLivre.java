@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import controller.ControladoraAvisoCursoLivre;
 import model.vo.CursoLivreVO;
+import model.vo.UsuarioVO;
 
 
 public class AvisoCursoLivre {
@@ -21,9 +22,12 @@ public class AvisoCursoLivre {
 	private static final int OPCAO_MENU_CONSULTAR_TODOS_AVISO_CURSO_LIVRE = 1;
 	private static final int OPCAO_MENU_CONSULTAR_UM_AVISO_CURSO_LIVRE = 2;
 	private static final int OPCAO_MENU_CONSULTAR_CURSO_LIVRE_SAIR = 9;
+	
+	private static final int ADMINISTRADOR = 1;
+	private static final int COORDENADOR = 2;
 
-	public void apresentarMenu() {
-		int opcao = this.apresentarOpcoesMenu();
+	public void apresentarMenu(UsuarioVO usuarioVO) {
+		int opcao = this.apresentarOpcoesMenu(usuarioVO.getIdTipoUsuario());
 
 		while (opcao != OPCAO_MENU_AVISO_SAIR) {
 			switch (opcao) {
@@ -48,13 +52,13 @@ public class AvisoCursoLivre {
 			}
 			}
 
-			opcao = this.apresentarOpcoesMenu();
+			opcao = this.apresentarOpcoesMenu(usuarioVO.getIdTipoUsuario());
 
 		}
 
 	}
 
-	private int apresentarOpcoesMenu() {
+	private int apresentarOpcoesMenu(int i) {
 
 		System.out.println("\nSistema de Avisos - Menu Avisos Cursos Livres ");
 		System.out.println("\n Opções: ");
